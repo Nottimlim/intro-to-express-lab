@@ -53,7 +53,6 @@ app.get('/shoes', (req, res) => {
         const minPrice = parseFloat(req.query['min-price']);
         filteredShoes = filteredShoes.filter(shoe => shoe.price >= minPrice);
     }
-      
     if (req.query['max-price']) {
         const maxPrice = parseFloat(req.query['max-price']);
         filteredShoes = filteredShoes.filter(shoe => shoe.price <= maxPrice);
