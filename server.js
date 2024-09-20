@@ -37,7 +37,7 @@ app.get('/roll/:number', (req, res) => {
     }
   });
 
-  app.get('/collectibles/:index', (req, res) => {
+app.get('/collectibles/:index', (req, res) => {
     const index = parseInt(req.params.index, 10); // Convert the parameter to an integer
     if (index >= 0 && index < collectibles.length) { // Check if the index is valid
       const item = collectibles[index]; // Get the item at the specified index
