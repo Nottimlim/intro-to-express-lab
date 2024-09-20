@@ -22,47 +22,47 @@ const shoes = [
 // Routes 
 
 app.get('/greetings/:username', (req, res) => {
-    const username = req.params.username; // Extract the username parameter from the URL.
-    const greetingMessage = `What's good ${username}!`; // Create a greeting message using the username.
-    res.send(greetingMessage); // Send the greeting message as the response.
+    const username = req.params.username; // Extract the username parameter from the URL
+    const greetingMessage = `What's good ${username}!`; // Create a greeting message using the username
+    res.send(greetingMessage); // Send the greeting message as the response
   });
 
 app.get('/roll/:number', (req, res) => {
-    const number = parseInt(req.params.number); // Convert the parameter to an integer.
-    if (isNaN(number)) { // Check if the parameter is not a number.
-      res.send('Specify a number'); // Respond with an error message.
+    const number = parseInt(req.params.number); // Convert the parameter to an integer
+    if (isNaN(number)) { // Check if the parameter is not a number
+      res.send('Specify a number'); // Respond with an error message
     } else {
-      const rolledNumber = Math.floor(Math.random() * (number + 1)); // Generate a random number between 0 and the given number.
-      res.send(`You rolled a ${rolledNumber}.`); // Respond with the rolled number.
+      const rolledNumber = Math.floor(Math.random() * (number + 1)); // Generate a random number between 0 and the given number
+      res.send(`You rolled a ${rolledNumber}.`); // Respond with the rolled number
     }
   });
 
   app.get('/collectibles/:index', (req, res) => {
-    const index = parseInt(req.params.index, 10); // Convert the parameter to an integer.
-    if (index >= 0 && index < collectibles.length) { // Check if the index is valid.
-      const item = collectibles[index]; // Get the item at the specified index.
+    const index = parseInt(req.params.index, 10); // Convert the parameter to an integer
+    if (index >= 0 && index < collectibles.length) { // Check if the index is valid
+      const item = collectibles[index]; // Get the item at the specified index
       res.send(`So, you want the ${item.name}? I might fuck around and give it away for like.. ${item.price}. `); // Respond with the item details.
     } else {
-      res.send("I aint got that fucking shit. Pull up another time. "); // Respond with an out-of-stock message.
+      res.send("I aint got that fucking shit. Pull up another time. "); // Respond with an message.
     }
   });
 
 app.get('/shoes', (req, res) => {
-  let filteredShoes = shoes; // Start with the full list of shoes.
-  if (req.query['min-price']) { // Check if the min-price query parameter is provided.
-    const minPrice = parseFloat(req.query['min-price']); // Convert the query parameter to a float.
-    filteredShoes = filteredShoes.filter(shoe => shoe.price >= minPrice); // Filter shoes by minimum price.
+  let filteredShoes = shoes; // Start with the full list of shoes
+  if (req.query['min-price']) { // Check if the min-price query parameter is provided
+    const minPrice = parseFloat(req.query['min-price']); // Convert the query parameter to a float
+    filteredShoes = filteredShoes.filter(shoe => shoe.price >= minPrice); // Filter shoes by minimum price
   }
-  if (req.query['max-price']) { // Check if the max-price query parameter is provided.
-    const maxPrice = parseFloat(req.query['max-price']); // Convert the query parameter to a float.
-    filteredShoes = filteredShoes.filter(shoe => shoe.price <= maxPrice); // Filter shoes by maximum price.
+  if (req.query['max-price']) { // Check if the max-price query parameter is provided
+    const maxPrice = parseFloat(req.query['max-price']); // Convert the query parameter to a float
+    filteredShoes = filteredShoes.filter(shoe => shoe.price <= maxPrice); // Filter shoes by maximum price
   }
-  if (req.query.type) { // Check if the type query parameter is provided.
-    const type = req.query.type; // Get the type query parameter.
-    filteredShoes = filteredShoes.filter(shoe => shoe.type === type); // Filter shoes by type.
+  if (req.query.type) { // Check if the type query parameter is provided
+    const type = req.query.type; // Get the type query parameter
+    filteredShoes = filteredShoes.filter(shoe => shoe.type === type); // Filter shoes by type
   }
-  const responseText = filteredShoes.map(shoe => `Name: ${shoe.name}, Price: ${shoe.price}, Type: ${shoe.type}`).join('\n'); // Format the filtered shoes into a readable string.
-  res.send(responseText); // Respond with the formatted string.
+  const responseText = filteredShoes.map(shoe => `Name: ${shoe.name}, Price: ${shoe.price}, Type: ${shoe.type}`).join('\n'); // Format the filtered shoes into a readable string
+  res.send(responseText); // Respond with the formatted string
 });
 
 app.listen(port, () => {
